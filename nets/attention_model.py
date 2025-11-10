@@ -8,7 +8,7 @@ from utils.tensor_functions import compute_in_batches
 from nets.graph_encoder import GraphAttentionEncoder
 from torch.nn import DataParallel
 from utils.beam_search import CachedLookup
-from utils.functions import sample_many
+
 
 
 def set_decode_type(model, decode_type):
@@ -279,6 +279,7 @@ class AttentionModel(nn.Module):
         :param input: (batch_size, graph_size, node_dim) input node features
         :return:
         """
+        from utils.functions import sample_many
         # Bit ugly but we need to pass the embeddings as well.
         # Making a tuple will not work with the problem.get_cost function
         return sample_many(
